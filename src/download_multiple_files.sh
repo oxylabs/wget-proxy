@@ -1,0 +1,1 @@
+wget http://example.com/file1.zip http://example.com/file2.zip http://example.com/file3.zip
