@@ -139,25 +139,28 @@ To download all files with a `.sig` extension, use the following command:
 
 The first method uses command line switches to specify the proxy server and authentication details.
 
-First, check your current IP adders. Run Wget in quiet mode and redirect the output to the terminal instead of downloading the file:
+First, check your current IP address. Run Wget in quiet mode and redirect the output to the terminal instead of downloading the file:
 
 ```shell
-~$ wget --quiet --output-document=- https://ip.oxylabs.io
+~$ wget --quiet --output-document=- https://ip.oxylabs.io/location
 # OR
-~$ wget -q -O - https://ip.oxylabs.io
+~$ wget -q -O - https://ip.oxylabs.io/location
 ```
 
 To use a proxy that doesn’t require authentication, use two `-e` or two `--execute` switches:
 
 ```shell
-~$ wget -q -O- -e use_proxy=yes -e http_proxy=12.13.14.15:1234 https://ip.oxylabs.io
-# OUTPUT: 12.13.14.15
+~$ wget -q -O- -e use_proxy=yes -e http_proxy=12.13.14.15:1234 https://ip.oxylabs.io/location
+```
+Output:
+```json
+{"ip":"104.200.141.20","providers":{"dbip":{"country":"US","asn":"AS46562","org_name":"Performive LLC","city":"New York","zip_code":"","time_zone":"","meta":"\u003ca href='https://db-ip.com'\u003eIP Geolocation by DB-IP\u003c/a\u003e"},"ip2location":{"country":"US","asn":"","org_name":"","city":"New York City","zip_code":"10011","time_zone":"-05:00","meta":"This site or product includes IP2Location LITE data available from \u003ca href=\"https://lite.ip2location.com\"\u003ehttps://lite.ip2location.com\u003c/a\u003e."},"ipinfo":{"country":"US","asn":"AS46562","org_name":"Performive LLC","city":"","zip_code":"","time_zone":"","meta":"\u003cp\u003eIP address data powered by \u003ca href=\"https://ipinfo.io\" \u003eIPinfo\u003c/a\u003e\u003c/p\u003e"},"maxmind":{"country":"US","asn":"AS46562","org_name":"PERFORMIVE","city":"","zip_code":"","time_zone":"-06:00","meta":"This product includes GeoLite2 Data created by MaxMind, available from https://www.maxmind.com."}}}
 ```
 
 If the proxy server requires user authentication, set the proxy username by using the` --proxy-user` switch. Similarly, set the proxy password using the` --proxy-password` switch:
 
 ```shell
-~$ wget -q -O- -e use_proxy=yes -e http_proxy=12.13.14.15:1234  --proxy-user=your_username --proxy-password=your_password https://ip.oxylabs.io
+~$ wget -q -O- -e use_proxy=yes -e http_proxy=12.13.14.15:1234  --proxy-user=your_username --proxy-password=your_password https://ip.oxylabs.io/location
 ```
 
 **The second method** is to use the .wgetrc configuration file.
@@ -179,7 +182,7 @@ http_proxy = http://your_username:your_password@12.13.14.15:1234
 As of now, every time Wget runs, it’ll use the specified proxy.
 
 ```shell
-$ wget -q -O- http://httpbin.org/ip
+$ wget -q -O- https://ip.oxylabs.io
 # Prints IP of the proxy server
 ```
 
